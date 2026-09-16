@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "TINA_PUBLIC_IS_LOCAL=true tinacms dev --datalayer-port 9010 -c \"next dev\"",
     "build": "tinacms build && next build",
-    "start": "next start",
+    "start": "serve out",
     "lint": "eslint"
   },
   "dependencies": {
@@ -28,6 +28,7 @@
     "@types/three": "^0.186.0",
     "eslint": "^9",
     "eslint-config-next": "16.3.5",
+    "serve": "^14.2.6",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
