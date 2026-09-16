@@ -1,0 +1,35 @@
+---
+title: "Streaming LLMs into a phone call"
+date: "2026-02-11"
+summary: "Latency budgets for a voice agent: token streaming, TTS chunking, and the barge-in problem nobody warns you about."
+topic: "Realtime"
+tags: ["Deepgram", "WebSockets", "Latency"]
+---
+
+A voice agent has one hard number: how long the caller waits after they stop talking. Past about 800ms it stops feeling like a conversation and starts feeling like a hold queue. Every component in the chain is spending that budget.
+
+## Spend the budget on paper first
+
+```text title="budget.md"
+endpointing (silence detect)   ~180ms
+STT final transcript            ~120ms
+LLM first token                 ~260ms
+TTS first audio chunk           ~150ms
+network + jitter buffer          ~90ms
+-----------------------------------------
+total to first sound            ~800ms
+```
+
+Note what's in the budget: first token, not full response. And first audio chunk, not full synthesis. If either of those waits for completion you've already lost, no matter how fast the model is.
+
+## Chunk TTS at clause boundaries
+
+Sentence-level chunking is the obvious move and it's too coarse — a long first sentence blows the budget alone. Splitting at commas and conjunctions gets audio out sooner, at the cost of slightly worse prosody. Callers forgive prosody. They don't forgive silence.
+
+## Barge-in is the actual hard part
+
+When the caller interrupts, three things must happen in the same instant: stop playback, cancel the in-flight LLM stream, and discard the TTS chunks already queued. Miss the third and the agent keeps talking over a caller who has moved on — which reads as rude in a way that a slow response never does.
+
+> Users read latency as thinking. They read talking over them as not listening. Only one of those is forgivable.
+
+The state machine for this is small — four states, maybe six transitions — and it is worth writing down explicitly rather than letting it emerge from event handlers. Ours emerged first. We rewrote it.

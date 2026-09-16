@@ -1,0 +1,23 @@
+---
+title: "Shipping 30% faster with AI in the loop"
+date: "2026-04-06"
+summary: "Where Claude Code and Cursor genuinely pay off on a team of six — and the review habits that keep quality from sliding."
+topic: "Practice"
+tags: ["Claude Code", "Cursor", "Team"]
+---
+
+The 30–40% figure is real but narrow. It's not that we think faster. It's that the work between having a decision and having it shipped — scaffolding, tests, migration files, the fourth CRUD resource that looks like the first three — collapsed.
+
+## Where it pays
+
+Test generation is the clearest win: describe the edge cases in a sentence, get a table-driven suite, then spend your attention on whether the cases are the right ones. Refactors across many files are second. Reading unfamiliar code is third, and underrated — asking why a module exists is faster than reconstructing it.
+
+## Where it doesn't
+
+Anything load-bearing on a decision the model can't see. Our idempotency scheme, the breaker placement, the read-flip order in the Postgres migration — those came from knowing which failures we could tolerate. A model that can't be paged has no opinion worth taking on that.
+
+> AI shortened the distance between decision and diff. It did not shorten the distance to the decision.
+
+## The review habits that kept it honest
+
+Three rules, and they're the whole system. The author reads every generated line before it goes in a PR — no exceptions, and it's a firing-line question in review. Generated tests don't count as review of generated code. And any diff the author can't explain out loud gets closed, not fixed.

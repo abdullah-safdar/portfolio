@@ -1,0 +1,33 @@
+---
+title: "Zero-downtime migration, MongoDB to Postgres"
+date: "2026-06-09"
+summary: "Dual writes, a background backfill, and the read-path switch. What I'd do differently on the next one."
+topic: "Data"
+tags: ["PostgreSQL", "MongoDB", "Migration"]
+---
+
+The product had outgrown its document store in a specific way: every meaningful query had become a join we were faking in application code. Reporting was the breaking point. We picked Postgres and gave ourselves one hard constraint — no maintenance window.
+
+## Phase one: dual writes
+
+Writes went to both stores behind a single repository interface. Mongo stayed authoritative; Postgres was allowed to be wrong. Every divergence got logged rather than thrown, and the log became our schema bug tracker for three weeks.
+
+```ts title="repo/orders.ts"
+async function create(order) {
+  const saved = await mongo.orders.insert(order);
+  queue.publish('order.mirror', saved).catch(logDivergence);
+  return saved;   // never block the user on the new store
+}
+```
+
+## Phase two: backfill, slowly
+
+A background worker walked the collection in created-at order at a rate we could throttle from a config value. It ran for nine days. Twice we dropped the rate to nearly nothing during traffic peaks, and nobody outside the team noticed either time.
+
+## Phase three: flip reads, per endpoint
+
+Reads moved one endpoint at a time behind a flag, starting with the ones where being wrong was cheapest. Two got flipped back within the hour. Because it was per endpoint, neither rollback touched anything else.
+
+> The migration wasn't risky because of the data. It was risky because of the assumptions the old schema had let us keep.
+
+What I'd change: I'd write the divergence checker before the dual writes, not after. We spent the first week reading logs by hand to learn things a fifty-line comparator would have told us on day one.

@@ -1,0 +1,37 @@
+---
+title: "Event-driven without the chaos"
+date: "2026-08-14"
+summary: "Dedup keys, idempotency and circuit breakers — the three pieces that turned a flaky integration layer into one I stopped getting paged about."
+topic: "Architecture"
+tags: ["RabbitMQ", "Idempotency", "Node.js"]
+---
+
+We moved to events for the usual reason: the monolith's request path had grown a chain of third-party calls, and any one of them timing out took the whole write down with it. Splitting it into producers and consumers fixed that in a week. It also bought us a new failure mode — the same event processed twice, three times, occasionally forty.
+
+## Every consumer gets a dedup key
+
+At-least-once delivery means your consumer will see duplicates. Not might — will. The fix is boring: derive a deterministic key from the event payload, write it before you do the work, and let the database's unique constraint be the arbiter.
+
+```ts title="consumers/settle-payment.ts"
+const key = `settle:${event.paymentId}:${event.attempt}`;
+
+const claimed = await db.processed.insertIfAbsent({ key });
+if (!claimed) return ack();   // someone already did this
+
+await settle(event);
+return ack();
+```
+
+The subtle part is ordering. Claim first, then work. If you work first and claim after, a crash in between leaves you with the side effect and no record of it — which is exactly the duplicate you were trying to prevent.
+
+## Circuit breakers belong at the edge, not the core
+
+Our first breaker sat inside the consumer, which meant a degraded provider still consumed messages, still failed, and still filled the retry queue. Moving the breaker to the HTTP client — one per provider, shared across consumers — let the queue hold the backlog instead of grinding it.
+
+> A retry queue is a buffer, not a punishment. If it's growing, something upstream should have stopped calling.
+
+## What the numbers looked like
+
+p95 dropped 25–30% once the synchronous third-party calls left the request path, and it held through several-fold traffic growth without a proportional infrastructure bill. The number I actually care about is different: duplicate processing incidents went from a weekly annoyance to none in the last two quarters.
+
+If you're starting this migration, do the dedup keys first. Not the topology, not the tooling — the keys. Everything else is recoverable; double-charging a customer is not.

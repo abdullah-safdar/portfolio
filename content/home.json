@@ -1,0 +1,240 @@
+{
+  "hero": {
+    "kicker": "~/abdullah $ whoami — lead full stack engineer",
+    "intro": "I build and scale web platforms, distributed microservices and event-driven systems in TypeScript, React, Next.js, Node.js and AWS — plus AI automation and agentic AI services in Python and FastAPI, and Solidity smart contracts across Ethereum and Solana. Currently leading 4–6 engineers on real-time AI and Web3 products used across global contact centers.",
+    "github": "https://github.com/abdullah-safdar",
+    "linkedin": "https://linkedin.com/in/abdullah-baig"
+  },
+  "ticker": [
+    "typescript",
+    "react · next.js",
+    "node.js · nestjs",
+    "python · fastapi",
+    "agentic ai",
+    "ai automation",
+    "event-driven microservices",
+    "rabbitmq",
+    "aws lambda",
+    "postgresql",
+    "mongodb",
+    "redis",
+    "graphql · grpc",
+    "llm integration",
+    "solidity · smart contracts",
+    "ethereum · solana",
+    "docker · ci/cd",
+    "team leadership"
+  ],
+  "stats": [
+    {
+      "idx": "01",
+      "tag": "experience",
+      "n": "7",
+      "unit": "years",
+      "bar": "70%",
+      "label": "Building and scaling production web platforms"
+    },
+    {
+      "idx": "02",
+      "tag": "leadership",
+      "n": "4–6",
+      "unit": "engineers",
+      "bar": "48%",
+      "label": "Led end-to-end — architecture through on-call"
+    },
+    {
+      "idx": "03",
+      "tag": "performance",
+      "n": "25–30",
+      "unit": "% p95",
+      "bar": "62%",
+      "label": "Latency cut by re-architecting to event-driven services"
+    },
+    {
+      "idx": "04",
+      "tag": "velocity",
+      "n": "30–40",
+      "unit": "% faster",
+      "bar": "82%",
+      "label": "Feature delivery via AI-assisted development workflows"
+    }
+  ],
+  "projects": [
+    {
+      "num": "01",
+      "name": "Phron AI",
+      "flow": [
+        { "n": "prompt" },
+        { "n": "llm gen", "a": true },
+        { "n": "compile", "a": true },
+        { "n": "on-chain", "a": true }
+      ],
+      "path": "~/work/phron-ai",
+      "year": "2026",
+      "metric": "LLM-generated contracts compiled in-browser, wallet-native auth",
+      "blurb": "Web3 AI compiler platform using LLMs to generate and compile Solidity and Rust contracts, with MetaMask on-chain auth and usage-based payments.",
+      "tags": ["LLM", "Solidity", "Next.js"]
+    },
+    {
+      "num": "02",
+      "name": "Call Agent",
+      "flow": [
+        { "n": "audio in" },
+        { "n": "stt", "a": true },
+        { "n": "llm stream", "a": true },
+        { "n": "tts out", "a": true }
+      ],
+      "path": "~/work/call-agent",
+      "year": "2026",
+      "metric": "Sub-second response on streaming LLM + TTS pipeline",
+      "blurb": "Real-time AI voice agent on streaming LLM responses with low-latency text-to-speech — built for global contact-center load.",
+      "tags": ["Realtime", "Deepgram", "WebSockets"]
+    },
+    {
+      "num": "03",
+      "name": "Token Launchpad",
+      "flow": [
+        { "n": "config" },
+        { "n": "sign", "a": true },
+        { "n": "deploy", "a": true },
+        { "n": "verify", "a": true }
+      ],
+      "path": "~/work/launchpad",
+      "year": "2025",
+      "metric": "Automated signing and on-chain deploys, zero manual steps",
+      "blurb": "Automated Solana bot for Pump.fun launches: wallet interactions, transaction signing and on-chain deployment workflows.",
+      "tags": ["Solana", "Node.js", "Web3"]
+    },
+    {
+      "num": "04",
+      "name": "Agentic Automations",
+      "flow": [
+        { "n": "task" },
+        { "n": "plan", "a": true },
+        { "n": "tool calls", "a": true },
+        { "n": "approval", "a": true }
+      ],
+      "path": "~/work/agents",
+      "year": "2025",
+      "metric": "Python + FastAPI services orchestrating multi-step agents",
+      "blurb": "Agentic AI workflows that call internal tools and APIs on their own — task planning, retries and human-in-the-loop approvals.",
+      "tags": ["Python", "FastAPI", "Agents"]
+    },
+    {
+      "num": "05",
+      "name": "Workflow Builder",
+      "flow": [
+        { "n": "drag" },
+        { "n": "validate", "a": true },
+        { "n": "publish", "a": true },
+        { "n": "tenant", "a": true }
+      ],
+      "path": "~/work/workflows",
+      "year": "2024",
+      "metric": "Multi-tenant config surface with role-based access",
+      "blurb": "Drag-and-drop workflow builder and admin surface for platform configuration across multi-tenant accounts.",
+      "tags": ["Next.js", "RBAC", "Design system"]
+    },
+    {
+      "num": "06",
+      "name": "Propskit",
+      "flow": [
+        { "n": "query" },
+        { "n": "resolver", "a": true },
+        { "n": "batch", "a": true },
+        { "n": "render", "a": true }
+      ],
+      "path": "~/work/propskit",
+      "year": "2022",
+      "metric": "Over-fetching removed — faster frontends on the same API",
+      "blurb": "Rebuilt the data layer on GraphQL to kill over-fetching, with measurable gains in API flexibility and frontend performance.",
+      "tags": ["GraphQL", "Perf", "React"]
+    }
+  ],
+  "caps": [
+    {
+      "idx": "01",
+      "shape": "frontend",
+      "label": "Frontend architecture",
+      "note": "React and Next.js at scale — layered UI, performance budgets, design systems."
+    },
+    {
+      "idx": "02",
+      "shape": "backend",
+      "label": "Backend & APIs",
+      "note": "Node.js, NestJS, Python and FastAPI across REST, GraphQL and gRPC."
+    },
+    {
+      "idx": "03",
+      "shape": "distributed",
+      "label": "Distributed systems",
+      "note": "Event-driven services on RabbitMQ and Redis, idempotent and retry-safe."
+    },
+    {
+      "idx": "04",
+      "shape": "cloud",
+      "label": "Cloud & DevOps",
+      "note": "AWS Lambda, Step Functions, SQS, Docker, CI/CD and observability."
+    },
+    {
+      "idx": "05",
+      "shape": "ai",
+      "label": "AI automation & agents",
+      "note": "Agentic workflows, LLM integration, real-time voice and tool calling."
+    },
+    {
+      "idx": "06",
+      "shape": "web3",
+      "label": "Web3 & smart contracts",
+      "note": "Solidity on Ethereum, Solana programs, wallet auth and on-chain payments."
+    }
+  ],
+  "skillGroups": [
+    { "title": "Languages", "items": "TypeScript · JavaScript · Solidity · Python · PHP · SQL" },
+    { "title": "Frontend", "items": "React · Next.js · UI architecture · web performance · responsive design" },
+    { "title": "Backend", "items": "Node.js · NestJS · REST · GraphQL · OpenAPI · gRPC · microservices · event-driven architecture · RabbitMQ · WebSockets" },
+    { "title": "Security & auth", "items": "JWT · OAuth 2.0 · RBAC · API rate limiting · secure session management" },
+    { "title": "Cloud & DevOps", "items": "AWS Lambda, Step Functions, Amplify, SQS, S3 · Docker · CI/CD · monitoring & observability" },
+    { "title": "Data & storage", "items": "PostgreSQL · MongoDB · DynamoDB · Redis · Elasticsearch · database modeling" },
+    { "title": "AI-assisted development", "items": "Claude Code · Cursor · ChatGPT · Copilot workflows · AI-driven review, test generation, refactoring" },
+    { "title": "Leadership", "items": "Team leadership · mentorship · performance management · incident management · delivery ownership" }
+  ],
+  "roles": [
+    {
+      "title": "Lead Software Engineer",
+      "company": "Plutus Software House",
+      "years": "2022 — Present",
+      "points": [
+        "Lead 4–6 engineers building real-time AI and Web3 platforms used across global contact centers.",
+        "Re-architected the core backend into event-driven microservices (Node.js, RabbitMQ, Redis) — p95 latency down 25–30% while absorbing several-fold traffic growth without proportional cost.",
+        "Drove team-wide adoption of AI-assisted development, automating boilerplate, scaffolding and test generation to cut delivery time an estimated 30–40%.",
+        "Led a zero-downtime MongoDB → PostgreSQL migration with dual writes and background backfill — no customer-facing interruption."
+      ]
+    },
+    {
+      "title": "Full Stack Engineer",
+      "company": "Scrapespot",
+      "years": "2021 — 2022",
+      "points": [
+        "Developed backend services in Node.js and NestJS across REST and GraphQL, favouring modular, maintainable architectures.",
+        "Integrated GraphQL data layers to reduce over-fetching and streamline frontend–backend communication."
+      ]
+    },
+    {
+      "title": "Software Developer",
+      "company": "Bargo Ventures",
+      "years": "2019 — 2021",
+      "points": [
+        "Designed and implemented RESTful APIs with Node.js and Laravel supporting scalable backend systems.",
+        "Improved frontend UI/UX and performance alongside designers on responsive interfaces."
+      ]
+    }
+  ],
+  "contact": {
+    "email": "abdullahsafdar222@gmail.com",
+    "phone": "+92 332 2608513",
+    "location": "Islamabad, PK · remote-first",
+    "education": "B.S. Computer Science, 2014–2018\nFAST — NUCES, Islamabad",
+    "now": "Leading backend architecture at Plutus Software House. Writing about event-driven systems."
+  }
+}
